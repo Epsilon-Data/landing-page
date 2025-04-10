@@ -1,0 +1,90 @@
+---
+type Props = {
+  images: string[];
+};
+
+const { images } = Astro.props;
+
+if (!images || images.length === 0) {
+  throw new Error("ImageGrid requires at least one image.");
+}
+---
+
+<div
+  class={`w-full h-200 grid gap-6 pt-15 pb-30 ${
+    images.length === 1
+      ? "grid-cols-1 grid-rows-1"
+      : images.length === 2
+        ? "grid-cols-2 grid-rows-1"
+        : images.length === 3
+          ? "grid-cols-2 grid-rows-2"
+          : images.length === 4
+            ? "grid-cols-2 grid-rows-2"
+            : ""
+  }`}
+>
+  {
+    images.length === 1 && (
+      <img
+        src={images[0]}
+        alt=""
+        class="w-full h-full object-cover rounded-xl shadow-gray-400 shadow-xl"
+      />
+    )
+  }
+
+  {
+    images.length === 2 && (
+      <>
+        <img
+          src={images[0]}
+          alt=""
+          class="w-full h-full object-cover rounded-xl shadow-gray-400 shadow-xl"
+        />
+        <img
+          src={images[1]}
+          alt=""
+          class="w-full h-full object-cover rounded-xl shadow-gray-400 shadow-xl"
+        />
+      </>
+    )
+  }
+
+  {
+    images.length === 3 && (
+      <>
+        <div class="flex flex-col gap-6 h-full">
+          <img
+            src={images[0]}
+            alt=""
+            class="w-full h-full object-cover rounded-xl shadow-xl shadow-gray-400 flex-1"
+          />
+          <img
+            src={images[1]}
+            alt=""
+            class="w-full h-full object-cover rounded-xl shadow-xl shadow-gray-400 flex-1"
+          />
+        </div>
+        <img
+          src={images[2]}
+          alt=""
+          class="w-full h-full object-cover rounded-xl shadow-xl shadow-gray-400 row-span-2"
+        />
+      </>
+    )
+  }
+
+  {
+    images.length === 4 && (
+      <>
+        {images.map((img, idx) => (
+          <img
+            src={img}
+            alt={`Image ${idx + 1}`}
+            class="w-full h-full object-cover rounded-xl shadow-gray-400 shadow-xl"
+          />
+        ))}
+      </>
+    )
+  }
+</div>

@@ -1,0 +1,19 @@
+---
+type Props = {
+  images: string[];
+};
+
+const { images } = Astro.props;
+
+if (!images || images.length === 0) {
+  throw new Error("ImageGrid requires at least one image.");
+}
+---
+
+<div class="relative flex items-center -space-x-4 pt-60">
+  {images.map((images, index) =>   <img
+    alt={ `collab ${index}`}
+    src={images}
+    class="relative inline-block h-20 w-20 rounded-full border-4 border-[#1481F1] object-cover object-center hover:z-10 focus:z-10"
+  />)}
+</div>

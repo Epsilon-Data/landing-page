@@ -1,0 +1,27 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+type Props = {
+  item: CollectionEntry<"main_feature">;
+};
+
+const { item } = Astro.props;
+---
+
+<div class="flex flex-col items-start p-[16px] pr-[32px] self-stretch ">
+  <div class="flex items-center px-4 py-2 gap-2 rounded-[32px] border border-[#FAFAFA]">
+    <div class="w-7 h-7">
+      <Image src={item.data.icon} alt="process-icon" width={300} height={300} />
+    </div>
+    <span class="font-medium text-[20px] leading-[1.35] [font-family:'Maven_Pro'] text-[#F5F5F5]">
+      {item.data.subtitle}
+    </span>
+  </div>
+  <h1 class="font-medium text-[32px] leading-[1.35] [font-family:'Helvetica_Neue'] text-[#F5F5F5]">
+    {item.data.title}
+  </h1>
+  <p class="font-normal text-[20px] leading-[1.4] [font-family:'Maven_Pro'] text-[#F5F5F5]/90 mt-5">
+    {item.body}
+  </p>
+</div>

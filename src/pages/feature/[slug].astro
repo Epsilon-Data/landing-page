@@ -1,0 +1,130 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Main from '../../components/Main.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageH1 from '../../components/PageH1.astro';
+import PageP from '../../components/PageP.astro';
+import ImageGrid from '../../components/ImageGrid.astro';
+
+export const getStaticPaths = async () => {
+  const features = await getCollection("feature");
+  const paths = features.map((feature: { slug: any; }) => {
+    return {
+      params: {
+        slug: feature.slug
+      },
+      props: {
+        feature
+      }
+    }
+  });
+
+  return paths;
+}
+
+type Props = {
+    feature: CollectionEntry<"feature">;
+}
+
+const { feature } = Astro.props;
+const { Content } = await feature.render();
+---
+
+<Layout title={feature.data.summary.title}>
+	<Main>
+    <section class="grid grid-cols-2 gap-4">
+      <div class="ml-18 my-6 sm:my-8 md:my-12 lg:my-16 xl:my-20">
+        <h1
+          class="text-[50px] font-medium leading-[110%] [font-family:'Helvetica_Neue'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,_#202020_5.04%,_#0F0F0F_90.37%)] bg-clip-text text-transparent mb-8"
+        >
+          {
+            feature?.data.detail.title.split(feature?.data.detail.highlight).map((part, index, arr) => (
+              <>
+                {part}
+                {index < arr.length - 1 && (
+                  <span class="text-[#1481F1]">{feature?.data.detail.highlight}</span>
+                )}
+              </>
+            ))
+          }
+        </h1>
+        <div
+          class="font-medium text-[20px] leading-[1.2] [font-family:'Maven_Pro'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,#202020_5.04%,#0F0F0F_90.37%)] bg-clip-text text-transparent"
+        >
+          {feature?.data.detail.description}
+        </div>
+        <div class="flex gap-4 items-center max-sm:gap-2 mt-10">
+          <button
+            type="button"
+            class="flex gap-2 justify-center items-center py-2 px-35 rounded-lg cursor-pointer max-sm:w-auto hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-[linear-gradient(135deg,_#1481F1_39.75%,_#014FE9_87.11%)]"
+            aria-label="Get Started"
+          >
+            <span
+              class="text-base font-medium leading-6 text-center text-neutral-50"
+            >
+              Get Started
+            </span>
+            <svg
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="chevron-right"
+              aria-hidden="true"
+            >
+              <g clip-path="url(#clip0_595_1301)">
+                <path
+                  d="M8.29492 7.82504L12.8749 12.415L8.29492 17.005L9.70492 18.415L15.7049 12.415L9.70492 6.41504L8.29492 7.82504Z"
+                  fill="#F5F5F5"></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_595_1301">
+                  <rect
+                    width="24"
+                    height="24"
+                    fill="white"
+                    transform="translate(0 0.119995)"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="relative w-120 h-120">
+        <div
+          class="absolute inset-0 z-0 rounded-full w-120 h-120"
+          style="background: radial-gradient(105.86% 95.13% at 28.64% 37.09%, #1481F1 26.54%, #014FE9 100%)"
+        ></div>
+      
+        <div class="absolute inset-0 z-10 rounded-r-full overflow-hidden w-120 h-120">
+          <video
+            src="/videos/demo-1.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            class="absolute top-1/2 -translate-y-1/2 object-cover shadow-xl rounded-lg h-80"
+          ></video>
+        </div>
+      </div>
+    </section>
+    <section class="relative min-h-screen w-full bg-white">
+      <div class="absolute inset-0 w-full h-full pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1512" height="484" viewBox="0 0 1512 484" fill="none">
+          <defs>
+            <mask id="invertMask">
+              <rect width="1512" height="484" fill="white"/>
+              <path d="M1512 0C1128.11 272.832 562.354 57.8314 0 0V483.5H1512V0Z" fill="black"/>
+            </mask>
+          </defs>
+          <rect width="1512" height="484" fill="#F3F4F6" mask="url(#invertMask)"/>
+        </svg>
+        
+      </div>
+      <div class="relative z-10 mx-50 pt-50">
+        <Content components={{ h1: PageH1, p: PageP, ImageGrid }}/>
+      </div>
+    </section>
+	</Main>
+</Layout>

@@ -1,0 +1,237 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Main from "../components/Main.astro";
+import {
+  getCollection,
+  getEntry,
+  render,
+  type CollectionEntry,
+} from "astro:content";
+import FeatureList from "../components/FeatureList.astro";
+import MainFeatureList from "../components/MainFeatureList.astro";
+import imageShape from "../../public/images/image-shape.svg";
+import { Image } from "astro:assets";
+import home1 from "../../public/images/home-1.jpeg";
+import home2 from "../../public/images/home-2.jpeg";
+import home3 from "../../public/images/home-3.jpeg";
+import home4 from "../../public/images/home-4.jpeg";
+import home5 from "../../public/images/home-5.jpeg";
+import GuideTabs from "../components/GuideTabs.astro";
+
+const headline = await getEntry("home", "headline");
+const about = await getEntry("home", "about");
+const guide = (await getEntry("guide", "main")) as CollectionEntry<"guide">;
+const main_features = await getCollection("main_feature");
+const features = await getCollection("feature");
+
+const { Content: Headline } = await render(headline as any);
+const highlight = "sharing, accessing and analysing";
+const { Content: About } = await render(about as any);
+---
+
+<Layout title="Epsilon">
+  <Main>
+    <section class="grid grid-cols-2 gap-4">
+      <div class="ml-18 my-6 sm:my-8 md:my-12 lg:my-16 xl:my-20">
+        <h1
+          class="text-[50px] font-medium leading-[110%] [font-family:'Helvetica_Neue'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,_#202020_5.04%,_#0F0F0F_90.37%)] bg-clip-text text-transparent mb-8"
+        >
+          {
+            headline?.data.title.split(highlight).map((part, index, arr) => (
+              <>
+                {part}
+                {index < arr.length - 1 && (
+                  <span class="text-[#1481F1]">{highlight}</span>
+                )}
+              </>
+            ))
+          }
+        </h1>
+        <div
+          class="font-medium text-[20px] leading-[1.2] [font-family:'Maven_Pro'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,#202020_5.04%,#0F0F0F_90.37%)] bg-clip-text text-transparent"
+        >
+          <Headline />
+        </div>
+        <div class="flex gap-4 items-center max-sm:gap-2 mt-10">
+          <button
+            type="button"
+            class="flex gap-2 justify-center items-center py-2 px-35 rounded-lg cursor-pointer max-sm:w-auto hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-[linear-gradient(135deg,_#1481F1_39.75%,_#014FE9_87.11%)]"
+            aria-label="Get Started"
+          >
+            <span
+              class="text-base font-medium leading-6 text-center text-neutral-50"
+            >
+              Get Started
+            </span>
+            <svg
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="chevron-right"
+              aria-hidden="true"
+            >
+              <g clip-path="url(#clip0_595_1301)">
+                <path
+                  d="M8.29492 7.82504L12.8749 12.415L8.29492 17.005L9.70492 18.415L15.7049 12.415L9.70492 6.41504L8.29492 7.82504Z"
+                  fill="#F5F5F5"></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_595_1301">
+                  <rect
+                    width="24"
+                    height="24"
+                    fill="white"
+                    transform="translate(0 0.119995)"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="px-15 py-2 h-10 text-base font-medium rounded-lg cursor-pointer bg-[#202020]/10 text-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-neutral-400"
+            aria-label="Get in Touch"
+          >
+            Get in Touch
+          </button>
+        </div>
+      </div>
+      <div class="relative flex items-center justify-center">
+        <div class="relative">
+          <Image src={imageShape} alt="image-shape" class="z-0" />
+          <Image
+            src={home1}
+            alt="home-image-1"
+            class="absolute top-110.5 left-99 z-10 rounded-full object-cover w-32 h-32 rotate-[-6.631deg] border-2 border-white"
+          />
+          <Image
+            src={home2}
+            alt="home-image-2"
+            class="absolute top-93 left-136.5 z-10 rounded-full object-cover w-19 h-19 rotate-[-5.956deg] border-2 border-white"
+          />
+          <Image
+            src={home3}
+            alt="home-image-3"
+            class="absolute top-123 left-5 z-10 rounded-full object-cover w-14 h-14 border-2 border-white"
+          />
+          <Image
+            src={home4}
+            alt="home-image-4"
+            class="absolute top-9.5 left-61.5 z-10 rounded-full object-cover w-85 h-85 rotate-[5.376deg] border-2 border-white shadow-black shadow-2xl image-float"
+          />
+          <Image
+            src={home5}
+            alt="home-image-5"
+            class="absolute top-99 left-35 z-10 rounded-full object-cover w-48 h-48 rotate-[-37deg] border-2 border-white shadow-[8px_12px_32px_3px_rgba(32,32,32,0.6)] image-float"
+          />
+        </div>
+      </div>
+    </section>
+    <section
+      class="scroll-fade-out sticky top-[76px] z-5 mt-16 mb-40 transition-opacity duration-200 ease-in-out px-45 py-16 opacity-100"
+    >
+      <div class="container mx-auto px-24 sm:px-26 lg:px-36 xl:px-40">
+        <h1
+          class="font-medium text-[20px] leading-[1.35] [font-family:'Maven_Pro'] text-[#1481F1]"
+        >
+          {about?.data.title}
+        </h1>
+        <div
+          class="font-light text-[32px] leading-[1.35] [font-family:'Helvetica_Neue'] text-[#444] mt-8"
+        >
+          <About />
+        </div>
+      </div>
+    </section>
+    <div
+      class="relative w-full bg-[radial-gradient(51.99%_82.03%_at_21.56%_28.24%,#1481F1_5.04%,#0E56E7_90.36%)]"
+    >
+      <section class="relative h-[602px] w-full bg-transparent">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1512"
+          height="602"
+          viewBox="0 0 1512 602"
+          preserveAspectRatio="none"
+          class="absolute top-0 left-0 w-full h-full object-cover z-0"
+        >
+          <defs>
+            <mask id="waveMask">
+              <rect width="100%" height="100%" fill="white"></rect>
+              <path
+                d="M1512 0C1126.5 414 581.5 178.5 0 0V602H1512V0Z"
+                fill="black"></path>
+            </mask>
+          </defs>
+          <rect width="100%" height="100%" fill="#F3F4F6" mask="url(#waveMask)"
+          ></rect>
+        </svg>
+        <div
+          class="absolute inset-0 z-10 flex items-center justify-center px-14 sm:px-18 md:px-22 lg:px-34 xl:px-42"
+        >
+          <video
+            controls
+            muted
+            autoplay
+            loop
+            playsinline
+            transition:persist
+            class="rounded-2xl"
+          >
+            <source src="/videos/demo-1.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+      <MainFeatureList main_features={main_features} />
+    </div>
+    <section class="relative min-h-screen bg-[#0E56E7] w-full">
+      <div class="absolute inset-0 w-full h-full pointer-events-none">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1512"
+          height="1184"
+          viewBox="0 0 1512 1184"
+          fill="none"
+          preserveAspectRatio="none"
+          class="top-0 left-0 object-cover z-0 absolute w-full h-full"
+        >
+          <path
+            d="M0 61.3639C706.629 -88.2831 995.084 85.9952 1512 61.3639V1184H0V61.3639Z"
+            fill="url(#paint0_radial_251_393)"></path>
+          <defs>
+            <radialGradient
+              id="paint0_radial_251_393"
+              cx="0"
+              cy="0"
+              r="1"
+              gradientUnits="userSpaceOnUse"
+              gradientTransform="translate(732 251.216) rotate(88.5261) scale(933.093 1191.68)"
+            >
+              <stop offset="0.0504239" stop-color="#202020"></stop>
+              <stop offset="0.903668" stop-color="#0F0F0F"></stop>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+      <div
+        class="relative mx-auto px-24 sm:px-26 lg:px-36 xl:px-40 z-10 justify-center text-center text-white [font-family:'Helvetica_Neue'] text-[48px] pt-40 font-medium"
+      >
+        <h1>Powerful features,</h1>
+        <h1>for <span class="text-[#1481F1]">smarter</span> research</h1>
+      </div>
+      <div class="relative z-10">
+        <FeatureList features={features} />
+      </div>
+      <div class="w-full h-auto bg-[#202020] z-0 relative"></div>
+    </section>
+    <section class="relative bg-gray-100 z-10 mb-80">
+      <h1
+        class="text-center text-[#202020] text-[50px] leading-[110%] [font-family:'Helvetica_Neue'] mt-50 font-medium"
+      >
+        {guide?.data.title}
+      </h1>
+      <GuideTabs guide={guide} />
+    </section>
+  </Main>
+</Layout>

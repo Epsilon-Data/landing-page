@@ -1,0 +1,67 @@
+---
+import { getEntry, render } from "astro:content";
+import CollabStack from "./CollabStack.astro";
+import PageContentP from "./PageContentP.astro";
+import ConnectedSection from "./ConnectedSection.astro";
+import Accordion from "./Accordion.astro";
+type Props = {
+  image: string;
+  mode: string;
+  entry: string;
+};
+
+const { image, mode, entry } = Astro.props;
+
+if (!image) {
+  throw new Error("ContentImage requires an image.");
+}
+
+const info = await getEntry("feature_extra", entry);
+const { Content } = await render(info as any);
+---
+
+<div class="w-full h-200 grid gap-6 pt-15 pb-30 grid-cols-2 grid-rows-1">
+  {
+    mode == "collaboration" && (
+      <>
+        <img
+          src={image}
+          alt="collab-image"
+          class="w-full h-full object-cover rounded-xl shadow-gray-400 shadow-xl"
+        />
+        <div>
+          <Content components={{ p: PageContentP, CollabStack }} />
+        </div>
+      </>
+    )
+  }
+  {
+    mode == "accordion" && (
+      <>
+        <img
+          src={image}
+          alt="accordion-image"
+          class="w-full h-full object-cover rounded-xl shadow-gray-400 shadow-xl"
+        />
+        <div>
+          <Content components={{ p: PageContentP, Accordion }} />
+        </div>
+      </>
+    )
+  }
+  {
+    mode == "text" && (
+      <>
+        <div class="pr-20">
+          <Content components={{ p: PageContentP, ConnectedSection }} />
+        </div>
+        <img
+          src={image}
+          alt="text-image"
+          class="w-full h-full object-cover rounded-xl shadow-gray-400 shadow-xl"
+        />
+      </>
+    )
+  }
+</div>
+

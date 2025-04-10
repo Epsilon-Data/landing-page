@@ -1,0 +1,21 @@
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1512"
+        height="602"
+        viewBox="0 0 1512 602"
+        preserveAspectRatio="none"
+        class="absolute top-0 left-0 w-full h-full object-cover z-0"
+      >
+        <defs>
+          <mask id="waveMask">
+            <rect width="100%" height="100%" fill="white" />
+            <path d="M1512 0C1126.5 414 581.5 178.5 0 0V602H1512V0Z" fill="black" />
+          </mask>
+        </defs>
+        <rect
+          width="100%"
+          height="100%"
+          fill="white"
+          mask="url(#waveMask)"
+        />
+      </svg>

@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+type Props = {
+  guide: CollectionEntry<"guide">;
+};
+
+const { guide } = Astro.props;
+---
+
+<div data-controller="tabs" data-tabs-index-value="0" class="mx-6 mt-6">
+  <ul class="flex flex-wrap justify-center gap-y-2">
+    {
+      guide.data.steps.map((step, index) => {
+        let classes = "mr-2";
+
+        if (index != 0) {
+          classes += " inactive";
+        }
+        return (
+          <li
+            class="cursor-pointer mr-2 border-b-2 border-gray-300 hover:border-black mx-10 hover:text-black [font-family:'Maven_Pro'] font-medium flex items-stretch gap-4 py-4 px-4 text-sm text-left w-sm"
+            data-action="click->tabs#change"
+            data-tabs-target="tab"
+          >
+              <span class="step-index text-gray-600 text-5xl font-bold text-center">{index + 1}</span>
+              <span class="step-title text-gray-600 whitespace-normal break-words text-xl">{step.title}</span>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <div class="relative min-h-[800px] mt-10">
+    {
+      guide.data.steps.map((step, index) => (
+        <div
+          class={`transition-opacity duration-500 ease-in-out absolute top-0 left-0 w-full px-1 py-2 justify-center ${
+            index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+          }`}
+          data-tabs-target="panel"
+        >
+          <Image
+            src={step.image}
+            alt={step.title}
+            width={1000}
+            height={800}
+            class="w-[1200px] h-[800px] rounded-2xl shadow-2xl shadow-gray-600 mx-auto"
+          />
+        </div>
+      ))
+    }
+  </div>
+</div>
