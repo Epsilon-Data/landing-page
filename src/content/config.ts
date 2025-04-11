@@ -16,6 +16,7 @@ const mainFeatureCollection = defineCollection({
 
 const featureCollection = defineCollection({
   schema: ({image}) => z.object({
+    nav: z.string(),
     summary: z.object({
       title: z.string(),
       description: z.string(),
