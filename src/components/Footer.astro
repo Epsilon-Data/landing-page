@@ -1,5 +1,8 @@
 ---
 import Logo from "./Logo.astro";
+import { getCollection } from "astro:content";
+
+const features = await getCollection("feature");
 ---
 
 <!-- Footer container -->
@@ -17,27 +20,11 @@ import Logo from "./Logo.astro";
         >
           Features
         </h6>
-        <p class="mb-4">
-          <a href="/feature/analyse_data" class="hover:text-white">Analyse data</a>
-        </p>
-        <p class="mb-4">
-          <a href="/feature/control_access" class="hover:text-white">Control data access</a>
-        </p>
-        <p class="mb-4">
-          <a href="/feature/track_changes" class="hover:text-white">Track changes</a>
-        </p>
-        <p class="mb-4">
-          <a href="/feature/automate_anonymisation" class="hover:text-white">Automate anonymisation</a>
-        </p>
-        <p class="mb-4">
-          <a href="/feature/store_securely" class="hover:text-white">Store data securely</a>
-        </p>
-        <p class="mb-4">
-          <a href="/feature/simplify_data" class="hover:text-white">Simplify collaboration</a>
-        </p>
-        <p class="mb-4">
-          <a href="/feature/transparent_results" class="hover:text-white">Transparently communicate results</a>
-        </p>
+        {features.map((feature) => (
+          <p class="mb-4">
+            <a href={`/feature/${feature.slug}`} class="hover:text-white">{feature.data.nav}</a>
+          </p>
+        ))}
       </div>
       <div>
         <h6
