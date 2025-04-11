@@ -10,9 +10,9 @@ const { items = [] }: { items: AccordionItem[] } = Astro.props as { items: Accor
 
 <div class="w-full [font-family:'Maven_Pro']">
   {items.map((item, index) => (
-    <div class="border-l-2 border-gray-400">
+    <div id={`wrapper-${index}`} class="border-l-2 border-gray-400 transition-colors duration-300">
       <button 
-        class="w-full flex items-center mt-5 text-slate-800"
+        class="w-full flex items-center mt-5 text-slate-800 font-medium"
         data-index={index}
         class:list-item
       >
@@ -22,7 +22,7 @@ const { items = [] }: { items: AccordionItem[] } = Astro.props as { items: Accor
         <span id={`title-${index}`} class="pl-2">{item.title}</span>
       </button>
       <div id={`content-${index}`} class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-        <div class="pl-8 pt-2 text-sm text-slate-500">
+        <div class="pl-8 pt-2 text-sm text-slate-800">
           {item.content}
         </div>
       </div>
@@ -31,24 +31,33 @@ const { items = [] }: { items: AccordionItem[] } = Astro.props as { items: Accor
 </div>
 
 <script type="module">
-  document.addEventListener("DOMContentLoaded", () => {
+  function setupAccordion() {
     const buttons = document.querySelectorAll("button[data-index]");
 
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const index = btn.getAttribute("data-index");
-        const title = document.getElementById(`title-${index}`);
         const content = document.getElementById(`content-${index}`);
-        const icon = document.getElementById(`icon-${index}`);
+        const title = document.getElementById(`title-${index}`);
+        const wrapper = document.getElementById(`wrapper-${index}`);
 
-        if (!content || !icon) return;
+        if (!content || !title || !wrapper) return;
 
-        if (content.style.maxHeight && content.style.maxHeight !== "0px") {
-          content.style.maxHeight = "0";
-        } else {
-          content.style.maxHeight = content.scrollHeight + "px";
-        }
+        const isOpen = content.style.maxHeight && content.style.maxHeight !== "0px";
+
+        // Toggle maxHeight
+        content.style.maxHeight = isOpen ? "0" : content.scrollHeight + "px";
+
+        // Toggle color styles
+        title.style.color = isOpen ? "" : "#1481F1";
+        wrapper.style.borderColor = isOpen ? "#D1D5DB" : "#1481F1"; // default: gray-400
       });
     });
-  });
+  }
+
+  // Trigger on all relevant page events
+  ["DOMContentLoaded", "astro:page-load", "astro:after-swap"].forEach(event =>
+    window.addEventListener(event, setupAccordion)
+  );
 </script>
+

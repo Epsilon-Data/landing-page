@@ -250,10 +250,8 @@ const features = await getCollection("feature");
       });
     }
   
-    // Initial load
     document.addEventListener("DOMContentLoaded", initDropdown);
   
-    // Re-run after page transitions
     document.addEventListener("astro:after-swap", () => {
       initDropdown();
     });
