@@ -31,7 +31,7 @@ const { Content: About } = await render(about as any);
 
 <Layout title="Epsilon">
   <Main>
-    <section class="grid grid-cols-2 gap-4">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="ml-18 my-6 sm:my-8 md:my-12 lg:my-16 xl:my-20">
         <h1
           class="text-[50px] font-medium leading-[110%] [font-family:'Helvetica_Neue'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,_#202020_5.04%,_#0F0F0F_90.37%)] bg-clip-text text-transparent mb-8"
@@ -52,7 +52,7 @@ const { Content: About } = await render(about as any);
         >
           <Headline />
         </div>
-        <div class="flex gap-4 items-center max-sm:gap-2 mt-10">
+        <div class="flex flex-col sm:flex-row gap-4 max-sm:gap-2 mt-10">
           <button
             type="button"
             class="flex gap-2 justify-center items-center py-2 px-35 rounded-lg cursor-pointer max-sm:w-auto hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-[linear-gradient(135deg,_#1481F1_39.75%,_#014FE9_87.11%)]"
@@ -167,7 +167,7 @@ const { Content: About } = await render(about as any);
           <rect width="100%" height="100%" fill="#F3F4F6" mask="url(#waveMask)"
           ></rect>
         </svg>
-        <div
+        <!-- <div
           class="absolute inset-0 z-10 flex items-center justify-center px-14 sm:px-18 md:px-22 lg:px-34 xl:px-42"
         >
           <video
@@ -181,7 +181,7 @@ const { Content: About } = await render(about as any);
           >
             <source src="/videos/demo-1.mp4" type="video/mp4" />
           </video>
-        </div>
+        </div> -->
       </section>
       <MainFeatureList main_features={main_features} />
     </div>

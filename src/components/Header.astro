@@ -11,20 +11,18 @@ const features = await getCollection("feature");
   aria-label="Main navigation"
 >
   <div
-    class="flex justify-between items-center px-20 py-3 w-full h-[76px] max-w-[1512px] max-md:px-10 max-md:py-3 max-sm:px-5 max-sm:py-3"
+    class="flex flex-wrap justify-between items-center gap-y-2 px-5 py-3 w-full h-[76px] max-w-screen-xl max-md:px-10 max-md:py-3 max-sm:px-5 max-sm:py-3"
   >
-    <a href="/" aria-label="Epsilon home">
+  <div class="flex items-center gap-1">
+    <a href="/" class="flex items-center gap-2" aria-label="Epsilon home">
       <Logo />
-    </a>
-    <div class="flex gap-1 items-start p-2.5">
-      <h1
-        class="relative -top-2 text-4xl font-bold tracking-tighter h-[37px] left-[-130px] text-neutral-50 w-[151px]"
-      >
+      <h1 class="text-4xl font-bold tracking-tighter text-neutral-50">
         epsilon
       </h1>
-    </div>
+    </a>
+  </div>
     <div
-      class="flex gap-4 justify-center items-center pl-32 max-md:pl-16 max-sm:hidden"
+      class="flex gap-1 justify-center items-center max-sm:hidden"
       role="navigation"
       aria-label="Main menu"
     >
@@ -53,7 +51,7 @@ const features = await getCollection("feature");
         </div>
         <div
           id="features-dropdown"
-          class="absolute drop-shadow-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-md max-w-[800px] min-w-[600px] top-full left-1/2 -translate-x-1/2 mt-8 rounded-xl bg-black/75 p-8 border border-white/20 z-50 opacity-0 scale-95 pointer-events-none transition-all duration-300 ease-out [font-family:'Maven_Pro'] font-medium inline-block"
+          class="absolute drop-shadow-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-md max-w-[800px] min-w-0 top-full left-1/2 -translate-x-1/2 mt-8 rounded-xl bg-black/75 p-8 border border-white/20 z-50 opacity-0 scale-95 pointer-events-none transition-all duration-300 ease-out [font-family:'Maven_Pro'] font-medium inline-block"
         >
           <div class="grid grid-cols-2 gap-x-4 gap-y-2">
             {
@@ -89,7 +87,7 @@ const features = await getCollection("feature");
           </div>
         </div>
       </div>
-      <a
+      <!-- <a
         href="/about"
         class="nav-link gap-1 px-4 pt-3.5 pb-3 h-12 text-base font-medium leading-6 text-center rounded-lg cursor-pointer text-neutral-100"
       >
@@ -100,7 +98,7 @@ const features = await getCollection("feature");
         class="nav-link gap-1 px-4 pt-3.5 pb-3 h-12 text-base font-medium leading-6 text-center rounded-lg cursor-pointer text-neutral-100"
       >
         Help
-      </a>
+      </a> -->
     </div>
 
     <!-- Authentication buttons -->
@@ -112,7 +110,7 @@ const features = await getCollection("feature");
       >
         Sign In
       </button>
-      <button
+      <!-- <button
         type="button"
         class="flex gap-2 justify-center items-center p-2 w-40 rounded-lg cursor-pointer max-sm:w-auto hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-[linear-gradient(135deg,_#1481F1_39.75%,_#014FE9_87.11%)]"
         aria-label="Get Started"
@@ -146,14 +144,14 @@ const features = await getCollection("feature");
             </clipPath>
           </defs>
         </svg>
-      </button>
+      </button> -->
     </div>
 
     <!-- Mobile menu button (hidden in the design but added for completeness) -->
     <button
       id="mobile-menu-button"
       type="button"
-      class="hidden p-2 rounded-md text-neutral-100 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400"
+      class="sm:hidden p-2 rounded-md text-neutral-100 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400"
       aria-expanded="false"
       aria-controls="mobile-menu"
       aria-label="Toggle mobile menu"
@@ -175,29 +173,48 @@ const features = await getCollection("feature");
     </button>
   </div>
 
-  <!-- Mobile menu (hidden by default) -->
-  <div
-    id="mobile-menu"
-    class="hidden w-full px-5 py-3 bg-neutral-800 max-sm:block"
-    aria-label="Mobile navigation"
-  >
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden w-full px-5 py-3 bg-neutral-800 sm:hidden" aria-label="Mobile navigation">
     <div class="flex flex-col space-y-2">
-      <a
-        href="/features"
-        class="px-4 py-2 text-base font-medium text-neutral-100 rounded-lg hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400"
-      >
-        Features
-      </a>
-      <a
-        href="/about"
-        class="px-4 py-2 text-base font-medium text-neutral-100 rounded-lg hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400"
-      >
+
+      <!-- Features expandable item -->
+      <div class="group">
+        <button
+          id="mobile-features-toggle"
+          type="button"
+          class="flex items-center justify-between w-full px-4 py-2 text-base font-medium text-neutral-100 rounded-lg hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400"
+        >
+          Features
+          <svg
+            class="w-5 h-5 transition-transform duration-200"
+            id="mobile-chevron-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="mobile-features-dropdown" class="flex flex-col mt-2 pl-4 space-y-1">
+          {
+            features.map((feature) => (
+              <a
+                href={`/feature/${feature.slug}`}
+                class="text-sm text-neutral-300 hover:text-white px-2 py-1 rounded"
+              >
+                {feature.data.nav}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Other menu items -->
+      <a href="/about" class="px-4 py-2 text-base font-medium text-neutral-100 rounded-lg hover:bg-neutral-700">
         About Us
       </a>
-      <a
-        href="/help"
-        class="px-4 py-2 text-base font-medium text-neutral-100 rounded-lg hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400"
-      >
+      <a href="/help" class="px-4 py-2 text-base font-medium text-neutral-100 rounded-lg hover:bg-neutral-700">
         Help
       </a>
     </div>
@@ -207,41 +224,53 @@ const features = await getCollection("feature");
       const link = document.getElementById("features-link");
       const icon = document.getElementById("features-icon");
       const dropdown = document.getElementById("features-dropdown");
-  
+
       if (!link || !icon || !dropdown) return;
-  
+
       let toggled = false;
-  
+
       const upSVG = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
           <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
         </svg>
       `;
-  
+
       const downSVG = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
           <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
         </svg>
       `;
-  
+
       const openDropdown = () => {
-        dropdown.classList.remove("opacity-0", "scale-95", "pointer-events-none");
-        dropdown.classList.add("opacity-100", "scale-100", "pointer-events-auto");
+        dropdown.classList.remove(
+          "opacity-0",
+          "scale-95",
+          "pointer-events-none"
+        );
+        dropdown.classList.add(
+          "opacity-100",
+          "scale-100",
+          "pointer-events-auto"
+        );
         icon.innerHTML = downSVG;
       };
-  
+
       const closeDropdown = () => {
         dropdown.classList.add("opacity-0", "scale-95", "pointer-events-none");
-        dropdown.classList.remove("opacity-100", "scale-100", "pointer-events-auto");
+        dropdown.classList.remove(
+          "opacity-100",
+          "scale-100",
+          "pointer-events-auto"
+        );
         icon.innerHTML = upSVG;
       };
-  
+
       link.addEventListener("click", (e) => {
         e.preventDefault();
         toggled = !toggled;
         toggled ? openDropdown() : closeDropdown();
       });
-  
+
       document.addEventListener("click", (e) => {
         if (!link.contains(e.target) && !dropdown.contains(e.target)) {
           toggled = false;
@@ -249,11 +278,41 @@ const features = await getCollection("feature");
         }
       });
     }
-  
-    document.addEventListener("DOMContentLoaded", initDropdown);
-  
+
+    function initMobileDropdown() {
+      const mobileMenuBtn = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileFeaturesToggle = document.getElementById("mobile-features-toggle");
+      const mobileDropdown = document.getElementById("mobile-features-dropdown");
+      const mobileChevron = document.getElementById("mobile-chevron-icon");
+
+      // Show menu
+      mobileMenuBtn?.addEventListener("click", () => {
+        const wasHidden = mobileMenu.classList.contains("hidden");
+        mobileMenu.classList.toggle("hidden");
+
+        // Automatically expand Features dropdown when opening mobile menu
+        if (wasHidden) {
+          mobileDropdown?.classList.remove("hidden");
+          mobileChevron?.classList.add("rotate-180");
+        }
+      });
+
+      // Toggle Features dropdown
+      mobileFeaturesToggle?.addEventListener("click", () => {
+        mobileDropdown?.classList.toggle("hidden");
+        mobileChevron?.classList.toggle("rotate-180");
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initDropdown();
+      initMobileDropdown();
+    });
+
     document.addEventListener("astro:after-swap", () => {
       initDropdown();
+      initMobileDropdown();
     });
   </script>
 </nav>
