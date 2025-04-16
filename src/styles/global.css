@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
 
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-mobile: 40rem;
+  --breakpoint-tablet: 49rem;
+  --breakpoint-laptop: 64rem;
+  --breakpoint-desktop: 80rem;
+}
+
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }

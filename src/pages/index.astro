@@ -31,10 +31,10 @@ const { Content: About } = await render(about as any);
 
 <Layout title="Epsilon">
   <Main>
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="ml-18 my-6 sm:my-8 md:my-12 lg:my-16 xl:my-20">
+    <section class="grid grid-cols-1 mobile:grid-cols-2 gap-4">
+      <div class="mx-18 my-6 tablet:my-10">
         <h1
-          class="text-[50px] font-medium leading-[110%] [font-family:'Helvetica_Neue'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,_#202020_5.04%,_#0F0F0F_90.37%)] bg-clip-text text-transparent mb-8"
+          class="text-xl tablet:text-3xl laptop:text-4xl desktop:text-5xl font-medium leading-[110%] [font-family:'Helvetica_Neue'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,_#202020_5.04%,_#0F0F0F_90.37%)] bg-clip-text text-transparent mb-8"
         >
           {
             headline?.data.title.split(highlight).map((part, index, arr) => (
@@ -48,18 +48,18 @@ const { Content: About } = await render(about as any);
           }
         </h1>
         <div
-          class="font-medium text-[20px] leading-[1.2] [font-family:'Maven_Pro'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,#202020_5.04%,#0F0F0F_90.37%)] bg-clip-text text-transparent"
+          class="font-medium text-sm laptop:text-lg desktop:text-xl leading-[1.2] [font-family:'Maven_Pro'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,#202020_5.04%,#0F0F0F_90.37%)] bg-clip-text text-transparent"
         >
           <Headline />
         </div>
-        <div class="flex flex-col sm:flex-row gap-4 max-sm:gap-2 mt-10">
+        <div class="flex flex-col tablet:flex-row gap-4 max-tablet:gap-2 mt-10">
           <button
             type="button"
-            class="flex gap-2 justify-center items-center py-2 px-35 rounded-lg cursor-pointer max-sm:w-auto hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-[linear-gradient(135deg,_#1481F1_39.75%,_#014FE9_87.11%)]"
+            class="flex gap-2 justify-center items-center py-2 px-5 laptop:w-60 desktop:w-90 rounded-lg cursor-pointer max-sm:w-auto hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-[linear-gradient(135deg,_#1481F1_39.75%,_#014FE9_87.11%)]"
             aria-label="Get Started"
           >
             <span
-              class="text-base font-medium leading-6 text-center text-neutral-50"
+              class="text-base font-medium text-center text-neutral-50"
             >
               Get Started
             </span>
@@ -90,55 +90,55 @@ const { Content: About } = await render(about as any);
           </button>
           <button
             type="button"
-            class="px-15 py-2 h-10 text-base font-medium rounded-lg cursor-pointer bg-[#202020]/10 text-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-neutral-400"
+            class="px-5 py-2 h-auto text-base laptop:w-40 desktop:w-60 font-medium rounded-lg cursor-pointer bg-[#202020]/10 text-black hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-neutral-400"
             aria-label="Get in Touch"
           >
             Get in Touch
           </button>
         </div>
       </div>
-      <div class="relative flex items-center justify-center">
+      <div class="relative flex items-center justify-center aspect-[4/3] max-mobile:scale-90">
         <div class="relative">
           <Image src={imageShape} alt="image-shape" class="z-0" />
           <Image
             src={home1}
             alt="home-image-1"
-            class="absolute top-110.5 left-99 z-10 rounded-full object-cover w-32 h-32 rotate-[-6.631deg] border-2 border-white"
+            class="absolute top-[71.2%] left-[61.5%] z-10 rounded-full object-cover w-[20.15%] h-[20.15%] rotate-[-6.631deg] border-2 border-white"
           />
           <Image
             src={home2}
             alt="home-image-2"
-            class="absolute top-93 left-136.5 z-10 rounded-full object-cover w-19 h-19 rotate-[-5.956deg] border-2 border-white"
+            class="absolute top-[59.8%] left-[84.7%] z-10 rounded-full object-cover w-[12%] h-[12%] rotate-[-5.956deg] border-2 border-white"
           />
           <Image
             src={home3}
             alt="home-image-3"
-            class="absolute top-123 left-5 z-10 rounded-full object-cover w-14 h-14 border-2 border-white"
+            class="absolute top-[78.9%] left-[3.2%] z-10 rounded-full object-cover w-[8.6%] h-[8.6%] border-2 border-white"
           />
           <Image
             src={home4}
             alt="home-image-4"
-            class="absolute top-9.5 left-61.5 z-10 rounded-full object-cover w-85 h-85 rotate-[5.376deg] border-2 border-white shadow-black shadow-2xl image-float"
+            class="absolute top-[6.5%] left-[38.5%] z-10 rounded-full object-cover w-[53%] h-[53%] rotate-[5.376deg] border-2 border-white shadow-black shadow-2xl image-float"
           />
           <Image
             src={home5}
             alt="home-image-5"
-            class="absolute top-99 left-35 z-10 rounded-full object-cover w-48 h-48 rotate-[-37deg] border-2 border-white shadow-[8px_12px_32px_3px_rgba(32,32,32,0.6)] image-float"
+            class="absolute top-[63.5%] left-[21.8%] z-10 rounded-full object-cover w-[29%] h-[29%] rotate-[-37deg] border-2 border-white shadow-[8px_12px_32px_3px_rgba(32,32,32,0.6)] image-float"
           />
         </div>
       </div>
     </section>
     <section
-      class="scroll-fade-out sticky top-[76px] z-5 mt-16 mb-40 transition-opacity duration-200 ease-in-out px-45 py-16 opacity-100"
+      class="scroll-fade-out sticky top-[76px] z-5 mt-16 mb-8 mobile:mb-15 tablet:mb-20 transition-opacity duration-200 ease-in-out py-5 tablet:py-10 opacity-100"
     >
-      <div class="container mx-auto px-24 sm:px-26 lg:px-36 xl:px-40">
+      <div class="container mx-auto px-10 tablet:px-20 laptop:px-30">
         <h1
-          class="font-medium text-[20px] leading-[1.35] [font-family:'Maven_Pro'] text-[#1481F1]"
+          class="font-medium text-sm mobile:text-base desktop:text-xl leading-[1.35] [font-family:'Maven_Pro'] text-[#1481F1]"
         >
           {about?.data.title}
         </h1>
         <div
-          class="font-light text-[32px] leading-[1.35] [font-family:'Helvetica_Neue'] text-[#444] mt-8"
+          class="font-light text-lg mobile:text-xl desktop:text-3xl leading-[1.35] [font-family:'Helvetica_Neue'] text-[#444] mt-8"
         >
           <About />
         </div>
@@ -147,7 +147,7 @@ const { Content: About } = await render(about as any);
     <div
       class="relative w-full bg-[radial-gradient(51.99%_82.03%_at_21.56%_28.24%,#1481F1_5.04%,#0E56E7_90.36%)]"
     >
-      <section class="relative h-[602px] w-full bg-transparent">
+      <section class="relative h-[185px] laptop:h-[550px] desktop:h-[602px] w-full bg-transparent">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="1512"
@@ -167,8 +167,8 @@ const { Content: About } = await render(about as any);
           <rect width="100%" height="100%" fill="#F3F4F6" mask="url(#waveMask)"
           ></rect>
         </svg>
-        <!-- <div
-          class="absolute inset-0 z-10 flex items-center justify-center px-14 sm:px-18 md:px-22 lg:px-34 xl:px-42"
+        <div
+          class="absolute inset-0 z-10 flex items-center justify-center px-5 mobile:px-20"
         >
           <video
             controls
@@ -177,11 +177,11 @@ const { Content: About } = await render(about as any);
             loop
             playsinline
             transition:persist
-            class="rounded-2xl"
+            class="rounded-md tablet:rounded-2xl"
           >
             <source src="/videos/demo-1.mp4" type="video/mp4" />
           </video>
-        </div> -->
+        </div>
       </section>
       <MainFeatureList main_features={main_features} />
     </div>
