@@ -33,9 +33,9 @@ const { Content } = await feature.render();
 <Layout title={feature.data.summary.title}>
 	<Main>
     <section class="grid grid-cols-1 gap-4 tablet:grid-cols-2">
-      <div class="ml-18 my-6 sm:my-8 md:my-12 lg:my-16 xl:my-20">
+      <div class="mx-6 tablet:mx-18 my-6 tablet:my-10">
         <h1
-          class="text-[50px] font-medium leading-[110%] [font-family:'Helvetica_Neue'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,_#202020_5.04%,_#0F0F0F_90.37%)] bg-clip-text text-transparent mb-8"
+          class="text-xl tablet:text-3xl laptop:text-4xl desktop:text-5xl font-medium leading-[110%] [font-family:'Helvetica_Neue'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,_#202020_5.04%,_#0F0F0F_90.37%)] bg-clip-text text-transparent mb-8"
         >
           {
             feature?.data.detail.title.split(feature?.data.detail.highlight).map((part, index, arr) => (
@@ -49,14 +49,14 @@ const { Content } = await feature.render();
           }
         </h1>
         <div
-          class="font-medium text-[20px] leading-[1.2] [font-family:'Maven_Pro'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,#202020_5.04%,#0F0F0F_90.37%)] bg-clip-text text-transparent"
+          class="font-medium text-sm laptop:text-lg desktop:text-xl leading-[1.2] [font-family:'Maven_Pro'] bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,#202020_5.04%,#0F0F0F_90.37%)] bg-clip-text text-transparent"
         >
           {feature?.data.detail.description}
         </div>
-        <div class="flex gap-4 items-center max-sm:gap-2 mt-10">
+        <div class="flex flex-col items-center mt-10">
           <button
             type="button"
-            class="flex gap-2 justify-center items-center py-2 px-35 rounded-lg cursor-pointer max-sm:w-auto hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-[linear-gradient(135deg,_#1481F1_39.75%,_#014FE9_87.11%)]"
+            class="flex gap-2 justify-center items-center py-2 px-5 w-full laptop:w-60 desktop:w-90 rounded-lg cursor-pointer max-sm:w-auto hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-[linear-gradient(135deg,_#1481F1_39.75%,_#014FE9_87.11%)]"
             aria-label="Get Started"
           >
             <span
@@ -91,38 +91,38 @@ const { Content } = await feature.render();
           </button>
         </div>
       </div>
-      <div class="relative w-120 h-120">
+      <div class="aspect-[4/3] scale-85 justify-center flex">
         <div
-          class="absolute inset-0 z-0 rounded-full w-120 h-120"
+          class="z-0 rounded-full w-[75%] h-[100%]"
           style="background: radial-gradient(105.86% 95.13% at 28.64% 37.09%, #1481F1 26.54%, #014FE9 100%)"
         ></div>
       
-        <div class="absolute inset-0 z-10 rounded-r-full overflow-hidden w-120 h-120">
+        <div class="absolute z-10 rounded-r-full overflow-hidden w-[75%] h-[100%]">
           <video
             src="/videos/demo-1.mp4"
             autoplay
             muted
             loop
             playsinline
-            class="absolute top-1/2 -translate-y-1/2 object-cover shadow-xl rounded-lg h-80"
+            class="absolute top-1/2 -translate-y-1/2 object-cover shadow-xl rounded-lg h-[60%]"
           ></video>
         </div>
       </div>
     </section>
-    <section class="relative min-h-screen w-full bg-white">
+    <section class="relative min-h-[600px] laptop:min-h-[750px] desktop:min-h-[850px] w-full bg-white">
       <div class="absolute inset-0 w-full h-full pointer-events-none">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1512" height="484" viewBox="0 0 1512 484" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1512 484" fill="none" preserveAspectRatio="none">
           <defs>
             <mask id="invertMask">
               <rect width="1512" height="484" fill="white"/>
               <path d="M1512 0C1128.11 272.832 562.354 57.8314 0 0V483.5H1512V0Z" fill="black"/>
             </mask>
           </defs>
-          <rect width="1512" height="484" fill="#F3F4F6" mask="url(#invertMask)"/>
+          <rect width="100%" height="100%" fill="#F3F4F6" mask="url(#invertMask)"/>
         </svg>
         
       </div>
-      <div class="relative z-10 mx-50 pt-50">
+      <div class="relative z-10 mx-10 mobile:mx-30 desktop:mx-50 pt-30 desktop:pt-100 pb-30">
         <Content components={{ h1: PageH1, p: PageP, ImageGrid }}/>
       </div>
     </section>

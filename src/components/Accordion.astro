@@ -19,7 +19,7 @@ const { items = [] }: { items: AccordionItem[] } = Astro.props as { items: Accor
         <span id={`icon-${index}`} class="text-slate-800 transition-transform duration-300 pl-2">
           <object type="image/svg+xml" data={item.icon} class="w-4 h-4 icon-container" id={`icon-${index}`} />
         </span>
-        <span id={`title-${index}`} class="pl-2">{item.title}</span>
+        <span id={`title-${index}`} class="pl-2 text-left">{item.title}</span>
       </button>
       <div id={`content-${index}`} class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
         <div class="pl-8 pt-2 text-sm text-slate-800">
@@ -55,7 +55,6 @@ const { items = [] }: { items: AccordionItem[] } = Astro.props as { items: Accor
     });
   }
 
-  // Trigger on all relevant page events
   ["DOMContentLoaded", "astro:page-load", "astro:after-swap"].forEach(event =>
     window.addEventListener(event, setupAccordion)
   );
