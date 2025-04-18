@@ -7,16 +7,16 @@ const features = await getCollection("feature");
 
 <!-- Footer container -->
 <footer
-  class="bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,_#202020_5.04%,_#0F0F0F_90.37%)] text-center text-white/75 lg:text-left [font-family:'Maven_Pro'] p-10"
+  class="bg-[radial-gradient(78.84%_78.8%_at_48.41%_21.22%,_#202020_5.04%,_#0F0F0F_90.37%)] text-white/75 text-left [font-family:'Maven_Pro'] p-10"
 >
-  <div class="mx-6 py-10 text-center md:text-left mb-10">
-    <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-      <div class="">
+  <div class="mx-6 py-10 text-left md:text-left mb-10">
+    <div class="grid-1 grid gap-8 mobile:grid-cols-3 laptop:grid-cols-4">
+      <div class="order-1 row-span-3 col-span-1">
         <Logo />
       </div>
-      <div>
+      <div class="order-2">
         <h6
-          class="mb-4 flex justify-center font-semibold md:justify-start text-white"
+          class="mb-4 flex font-semibold md:justify-start text-white"
         >
           Features
         </h6>
@@ -26,9 +26,9 @@ const features = await getCollection("feature");
           </p>
         ))}
       </div>
-      <div>
+      <div class="order-3">
         <h6
-          class="mb-4 flex justify-center font-semibold md:justify-start text-white"
+          class="mb-4 flex font-semibold md:justify-start text-white"
         >
           Resources
         </h6>
@@ -39,9 +39,9 @@ const features = await getCollection("feature");
           <a href="#!" class="hover:text-white">Contact Us</a>
         </p>
       </div>
-      <div>
+      <div class="order-4">
         <h6
-          class="mb-4 flex justify-center font-semibold md:justify-start text-white"
+          class="mb-4 flex font-semibold md:justify-start text-white"
         >
           Explore
         </h6>
@@ -56,7 +56,7 @@ const features = await getCollection("feature");
   </div>
 
   <div
-    class="flex items-center justify-center lg:justify-between border-t border-white/75 pt-5 pb-10 px-5"
+    class="flex items-center justify-center laptop:justify-between border-t border-white/75 pt-5 pb-10 px-5"
   >
     <div class="me-12 lg:flex gap-10">
       <span><a href="#!" class="hover:text-white">Terms of use</a></span>

@@ -11,7 +11,7 @@ const { features } = Astro.props;
 ---
 
 <div
-  class="relative flex flex-wrap justify-center gap-x-8 gap-y-16 mx-auto w-full max-w-screen-xl px-4 pt-30 pb-20"
+  class="relative flex flex-wrap justify-center gap-x-8 gap-y-16 mx-auto w-full max-w-screen-xl px-4 pt-15 mobile:pt-20 tablet:pt-30 pb-20"
 >
   {features.map(feature => <Feature item={feature} />)}
 </div>

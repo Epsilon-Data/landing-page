@@ -9,100 +9,209 @@ type Props = {
 const { guide } = Astro.props;
 ---
 
-<div data-controller="tabs" data-tabs-index-value="0" class="mx-6 mt-6">
-  <ul class="flex flex-wrap justify-center gap-y-2">
-    {
-      guide.data.steps.map((step, index) => {
-        let classes = "mr-2";
+<div class="hidden tablet:block">
+  <div
+    data-controller="tabs"
+    data-tabs-index-value="0"
+    class="mx-0 desktop:mx-6 mt-6"
+  >
+    <ul class="flex flex-wrap justify-center gap-y-2">
+      {
+        guide.data.steps.map((step, index) => {
+          let classes = "mr-2";
 
-        if (index != 0) {
-          classes += " inactive";
-        }
-        return (
-          <li
-            class="cursor-pointer mr-2 border-b-2 border-gray-300 hover:border-black mx-10 hover:text-black [font-family:'Maven_Pro'] font-medium flex items-stretch gap-4 py-4 px-4 text-sm text-left w-sm"
-            data-action="click->tabs#change"
-            data-tabs-target="tab"
+          if (index != 0) {
+            classes += " inactive";
+          }
+          return (
+            <li
+              class="cursor-pointer mr-2 border-b-2 border-gray-300 hover:border-black mx-10 hover:text-black [font-family:'Maven_Pro'] font-medium flex items-stretch gap-4 py-4 px-4 text-sm text-left w-71 desktop:w-sm"
+              data-action="click->tabs#change"
+              data-tabs-target="tab"
+            >
+              <span class="step-index text-gray-600 text-3xl desktop:text-5xl font-bold text-center">
+                {index + 1}
+              </span>
+              <span class="step-title text-gray-600 whitespace-normal break-words text-sm desktop:text-xl">
+                {step.title}
+              </span>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <div class="relative mt-10">
+      {
+        guide.data.steps.map((step, index) => (
+          <div
+            class={`transition-opacity duration-500 ease-in-out ${
+              index === 0
+                ? "relative opacity-100 z-10"
+                : "absolute opacity-0 z-0 pointer-events-none"
+            } top-0 left-0 w-full px-1 py-2 justify-center`}
+            data-tabs-target="panel"
           >
-              <span class="step-index text-gray-600 text-5xl font-bold text-center">{index + 1}</span>
-              <span class="step-title text-gray-600 whitespace-normal break-words text-xl">{step.title}</span>
-          </li>
-        );
-      })
-    }
-  </ul>
-  <div class="relative min-h-[800px] mt-10">
+            <Image
+              src={step.image}
+              alt={step.title}
+              width={1000}
+              height={800}
+              class="w-[80%] h-auto desktop:w-[60%] rounded-2xl shadow-2xl shadow-gray-600 mx-auto"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+<div
+  id="mobile-tabs"
+  class="block tablet:hidden mt-6"
+  data-controller="mobile-tabs"
+  data-mobile-tabs-index-value="0"
+>
+  <div class="relative">
     {
       guide.data.steps.map((step, index) => (
         <div
-          class={`transition-opacity duration-500 ease-in-out absolute top-0 left-0 w-full px-1 py-2 justify-center ${
-            index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-          }`}
-          data-tabs-target="panel"
+          class={`transition-opacity duration-500 ease-in-out ${
+            index === 0
+              ? "relative opacity-100 z-10"
+              : "absolute opacity-0 z-0 pointer-events-none"
+          } top-0 left-0 w-full px-4 py-2 text-center`}
+          data-mobile-tabs-target="panel"
         >
           <Image
             src={step.image}
             alt={step.title}
             width={1000}
             height={800}
-            class="w-[1200px] h-[800px] rounded-2xl shadow-2xl shadow-gray-600 mx-auto"
+            class="w-[90%] h-auto rounded-2xl shadow-2xl shadow-gray-600 mx-auto"
           />
+          <div class="mt-10 mobile:flex mobile:items-center mobile:justify-center mobile:gap-10">
+            <div class="text-2xl font-bold text-blue-500">{index + 1}</div>
+            <div class="text-xl font-semibold">{step.title}</div>
+          </div>
         </div>
       ))
     }
   </div>
-  <script is:inline>
-    function initTabs() {
-      const container = document.querySelector('[data-controller="tabs"]');
-      if (!container) return;
-  
-      const tabTargets = Array.from(container.querySelectorAll('[data-tabs-target="tab"]'));
-      const panelTargets = Array.from(container.querySelectorAll('[data-tabs-target="panel"]'));
-      let index = 0;
-  
-      const showTab = () => {
-        panelTargets.forEach((el, i) => {
-          el.classList.toggle("opacity-100", i === index);
-          el.classList.toggle("z-10", i === index);
-          el.classList.toggle("opacity-0", i !== index);
-          el.classList.toggle("z-0", i !== index);
-          el.classList.toggle("pointer-events-none", i !== index);
-        });
-  
-        tabTargets.forEach((el, i) => {
-          const stepTitle = el.querySelector(".step-title");
-          const stepIndex = el.querySelector(".step-index");
-  
-          if (i === index) {
-            stepTitle?.classList.add("text-black");
-            stepTitle?.classList.remove("text-gray-600");
-            el.classList.add("border-blue-500");
-            el.classList.remove("border-gray-300");
-            stepIndex?.classList.add("text-blue-500");
-            stepIndex?.classList.remove("text-gray-600");
-          } else {
-            stepTitle?.classList.add("text-gray-600");
-            stepTitle?.classList.remove("text-black");
-            el.classList.add("border-gray-300");
-            el.classList.remove("border-blue-500");
-            stepIndex?.classList.add("text-gray-600");
-            stepIndex?.classList.remove("text-blue-500");
-          }
-        });
-      };
-  
-      tabTargets.forEach((tab, i) => {
-        tab.addEventListener("click", (event) => {
-          event.preventDefault();
-          index = i;
-          showTab();
-        });
-      });
-  
-      showTab();
-    }
-  
-    document.addEventListener("astro:page-load", initTabs);
-    window.addEventListener("pageshow", initTabs);
-  </script>
+  <div class="flex justify-center mt-4 gap-4">
+    <button
+      id="mobile-prev"
+      class="bg-black/80 text-white/80 rounded-full px-4 py-2 text-xl disabled:opacity-50 aspect-square"
+      ><img src="/icons/tabs-arrow-left.svg" alt="Previous" class="w-6 h-6" /></button
+    >
+    <button
+      id="mobile-next"
+      class="bg-black/80 text-white/80 rounded-full px-4 py-2 text-xl disabled:opacity-50 aspect-square"
+      ><img src="/icons/tabs-arrow-right.svg" alt="Next" class="w-6 h-6" /></button
+    >
+  </div>
 </div>
+<script is:inline>
+  function initTabs() {
+    const container = document.querySelector('[data-controller="tabs"]');
+    if (!container) return;
+
+    const tabTargets = Array.from(
+      container.querySelectorAll('[data-tabs-target="tab"]')
+    );
+    const panelTargets = Array.from(
+      container.querySelectorAll('[data-tabs-target="panel"]')
+    );
+    let index = 0;
+
+    const showTab = () => {
+      panelTargets.forEach((el, i) => {
+        el.classList.toggle("opacity-100", i === index);
+        el.classList.toggle("z-10", i === index);
+        el.classList.toggle("opacity-0", i !== index);
+        el.classList.toggle("z-0", i !== index);
+        el.classList.toggle("pointer-events-none", i !== index);
+      });
+
+      tabTargets.forEach((el, i) => {
+        const stepTitle = el.querySelector(".step-title");
+        const stepIndex = el.querySelector(".step-index");
+
+        if (i === index) {
+          stepTitle?.classList.add("text-black");
+          stepTitle?.classList.remove("text-gray-600");
+          el.classList.add("border-blue-500");
+          el.classList.remove("border-gray-300");
+          stepIndex?.classList.add("text-blue-500");
+          stepIndex?.classList.remove("text-gray-600");
+        } else {
+          stepTitle?.classList.add("text-gray-600");
+          stepTitle?.classList.remove("text-black");
+          el.classList.add("border-gray-300");
+          el.classList.remove("border-blue-500");
+          stepIndex?.classList.add("text-gray-600");
+          stepIndex?.classList.remove("text-blue-500");
+        }
+      });
+    };
+
+    tabTargets.forEach((tab, i) => {
+      tab.addEventListener("click", (event) => {
+        event.preventDefault();
+        index = i;
+        showTab();
+      });
+    });
+
+    showTab();
+  }
+
+  function initMobileTabs() {
+    const container = document.querySelector('[data-controller="mobile-tabs"]');
+    if (!container) return;
+
+    const panels = Array.from(
+      container.querySelectorAll('[data-mobile-tabs-target="panel"]')
+    );
+    const prevBtn = document.getElementById("mobile-prev");
+    const nextBtn = document.getElementById("mobile-next");
+    let index = 0;
+
+    function showMobileStep() {
+      panels.forEach((panel, i) => {
+        panel.classList.toggle("opacity-100", i === index);
+        panel.classList.toggle("z-10", i === index);
+        panel.classList.toggle("opacity-0", i !== index);
+        panel.classList.toggle("z-0", i !== index);
+        panel.classList.toggle("pointer-events-none", i !== index);
+      });
+
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === panels.length - 1;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (index > 0) {
+        index--;
+        showMobileStep();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (index < panels.length - 1) {
+        index++;
+        showMobileStep();
+      }
+    });
+
+    showMobileStep();
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    initTabs();
+    initMobileTabs();
+  });
+
+  window.addEventListener("pageshow", () => {
+    initTabs();
+    initMobileTabs();
+  });
+</script>

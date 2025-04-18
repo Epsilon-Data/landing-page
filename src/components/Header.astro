@@ -11,7 +11,7 @@ const features = await getCollection("feature");
   aria-label="Main navigation"
 >
   <div
-    class="flex flex-wrap justify-between items-center gap-y-2 py-3 w-full h-[76px] px-5 tablet:px-10 bg-neutral-800 bg-opacity-90"
+    class="flex flex-wrap justify-between items-center gap-y-2 py-3 w-full h-[76px] px-5 tablet:px-10 bg-black/75 backdrop-blur-md"
   >
     <div class="flex items-center gap-1">
       <a href="/" class="flex items-center gap-2" aria-label="Epsilon home">
@@ -151,25 +151,16 @@ const features = await getCollection("feature");
     <button
       id="mobile-menu-button"
       type="button"
-      class="tablet:hidden p-2 rounded-md text-neutral-100 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400"
+      class="tablet:hidden p-2 rounded-md text-neutral-100 hover:bg-neutral-700"
       aria-expanded="false"
       aria-controls="mobile-menu"
       aria-label="Toggle mobile menu"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        aria-hidden="true"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
+      <div class="menu-icon space-y-1.5">
+        <span class="block h-0.5 w-6 bg-white transition-transform duration-300 origin-top-left rounded-xl"></span>
+        <span class="block h-0.5 w-6 bg-white transition-opacity duration-300 rounded-xl"></span>
+        <span class="block h-0.5 w-6 bg-white transition-transform duration-300 origin-bottom-left rounded-xl"></span>
+      </div>
     </button>
   </div>
 
@@ -354,6 +345,9 @@ const features = await getCollection("feature");
       mobileMenuBtn?.addEventListener("click", () => {
         const wasHidden = mobileMenu.classList.contains("hidden");
         mobileMenu.classList.toggle("hidden");
+
+        // Toggle icon animation class
+        mobileMenuBtn.classList.toggle("open");
 
         // Automatically expand Features dropdown when opening mobile menu
         if (wasHidden) {

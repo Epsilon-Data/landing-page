@@ -9,19 +9,30 @@ type Props = {
 const { item } = Astro.props;
 ---
 
-<div class="flex flex-col items-start p-[16px] pr-[32px] self-stretch ">
-  <div class="flex items-center px-4 py-2 gap-2 rounded-[32px] border border-[#FAFAFA] mb-10">
-    <div class="w-7 h-7">
-      <Image src={item.data.icon} alt="process-icon" width={300} height={300} />
-    </div>
-    <span class="font-medium text-[20px] leading-[1.35] [font-family:'Maven_Pro'] text-[#F5F5F5]">
-      {item.data.subtitle}
-    </span>
+<div class="flex flex-col tablet:flex-row items-start gap-8 p-[8px] tablet:p-[16px] self-stretch">
+    <!-- Image Section -->
+  <div class="w-full tablet:w-[40%] order-1 tablet:order-2">
+    <Image
+      src={item.data.image}
+      alt={item.data.title}
+      class="rounded-xl border-2 border-white object-cover w-full tablet:w-[80%] h-auto max-h-[400px]"
+    />
   </div>
-  <h1 class="font-medium text-[32px] leading-[1.35] [font-family:'Helvetica_Neue'] text-[#F5F5F5]">
-    {item.data.title}
-  </h1>
-  <p class="font-normal text-[20px] leading-[1.4] [font-family:'Maven_Pro'] text-[#F5F5F5]/90 mt-5">
-    {item.body}
-  </p>
+  <!-- Content Section -->
+  <div class="flex-1 order-2 tablet:order-1">
+    <div class="inline-flex items-center px-4 py-2 gap-2 rounded-[32px] border border-[#FAFAFA] mb-5 mobile:mb-7">
+      <div class="w-4 h-4 tablet:w-5 tablet:h-5">
+        <Image src={item.data.icon} alt="process-icon" width={300} height={300} />
+      </div>
+      <span class="font-medium text-sm mobile:text-base leading-[1.35] [font-family:'Maven_Pro'] text-[#F5F5F5]">
+        {item.data.subtitle}
+      </span>
+    </div>
+    <h1 class="font-medium text-xl tablet:text-2xl desktop:text-3xl leading-[1.35] [font-family:'Helvetica_Neue'] text-[#F5F5F5]">
+      {item.data.title}
+    </h1>
+    <p class="font-normal text-base tablet:text-lg desktop:text-xl leading-[1.4] [font-family:'Maven_Pro'] text-[#F5F5F5]/90 mt-2">
+      {item.body}
+    </p>
+  </div>
 </div>

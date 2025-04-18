@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
-import arrowIcon from "../../public/icons/arrow.svg";
+import arrowIcon from "../../public/icons/learn-arrow.svg";
 
 type Props = {
   item: CollectionEntry<"feature">;
@@ -12,30 +12,30 @@ const { item } = Astro.props;
 
 <div
   class="flex flex-col justify-between items-start
-         w-full sm:w-[48%] lg:w-[30%] max-w-[432px]
-         min-h-[244px] p-4 flex-shrink-0 rounded-lg
+         w-[85%] mobile:w-[40%] tablet:w-[30%] max-w-[432px]
+         min-h-[200px] p-4 flex-shrink-0 rounded-lg
          bg-[rgba(32,32,32,1)]
          dark:bg-[#202020]]"
 >
   <div class="flex flex-col items-start self-stretch gap-1">
-    <div class="w-8 h-8 mb-6">
+    <div class="w-6 h-6 mobile:w-8 mobile:h-8 mb-3">
       <Image src={item.data.icon} alt="feature-icon" width={300} height={300} />
     </div>
     <h2
-      class="self-stretch text-[#9FCBF9] font-medium text-[20px] leading-[27px] [font-family:'Maven_Pro']"
+      class="self-stretch text-[#9FCBF9] font-medium text-base leading-10 [font-family:'Maven_Pro']"
     >
       {item.data.summary.title}
     </h2>
 
     <p
-      class="self-stretch text-[#F5F5F5] font-normal text-[20px] leading-[27px] [font-family:'Maven_Pro']"
+      class="self-stretch text-[#F5F5F5] font-normal text-base leading-6 [font-family:'Maven_Pro']"
     >
       {item.data.summary.description}
     </p>
   </div>
   <a
     href={`/feature/${item.slug}`}
-    class="flex items-center gap-2 text-[#1481F1] font-medium text-[16px] leading-[22.4px] [font-family:'Maven_Pro'] cursor-pointer"
+    class="flex items-center gap-2 text-[#1481F1] font-medium text-base leading-10 [font-family:'Maven_Pro'] cursor-pointer"
   >
       <span>Learn more</span>
       <Image src={arrowIcon} alt="arrow-icon" />

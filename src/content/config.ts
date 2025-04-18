@@ -11,6 +11,7 @@ const mainFeatureCollection = defineCollection({
     title: z.string(),
     icon: image(),
     subtitle: z.string(),
+    image: image(),
   }),
 });
 

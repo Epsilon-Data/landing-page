@@ -185,37 +185,28 @@ const { Content: About } = await render(about as any);
       </section>
       <MainFeatureList main_features={main_features} />
     </div>
-    <section class="relative min-h-screen bg-[#0E56E7] w-full">
-      <div class="absolute inset-0 w-full h-full pointer-events-none">
+    <section class="relative min-h-screen bg-black w-full">
+      <div class="absolute h-[500px] mobile:h-[700px] laptop:h-[900px] desktop:h-[1800px] w-full bg-transparent">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="1512"
-          height="1184"
           viewBox="0 0 1512 1184"
-          fill="none"
           preserveAspectRatio="none"
-          class="top-0 left-0 object-cover z-0 absolute w-full h-full"
+          class="w-full h-full"
         >
-          <path
-            d="M0 61.3639C706.629 -88.2831 995.084 85.9952 1512 61.3639V1184H0V61.3639Z"
-            fill="url(#paint0_radial_251_393)"></path>
           <defs>
-            <radialGradient
-              id="paint0_radial_251_393"
-              cx="0"
-              cy="0"
-              r="1"
-              gradientUnits="userSpaceOnUse"
-              gradientTransform="translate(732 251.216) rotate(88.5261) scale(933.093 1191.68)"
-            >
-              <stop offset="0.0504239" stop-color="#202020"></stop>
-              <stop offset="0.903668" stop-color="#0F0F0F"></stop>
-            </radialGradient>
+            <mask id="invertedWaveMask">
+              <rect width="100%" height="100%" fill="white" />
+              <path
+                d="M0 61.3639C706.629 -88.2831 995.084 85.9952 1512 61.3639V1184H0V61.3639Z"
+                fill="black"
+              />
+            </mask>
           </defs>
+          <rect width="100%" height="100%" fill="#0E56E7" mask="url(#invertedWaveMask)" />
         </svg>
       </div>
       <div
-        class="relative mx-auto px-24 sm:px-26 lg:px-36 xl:px-40 z-10 justify-center text-center text-white [font-family:'Helvetica_Neue'] text-[48px] pt-40 font-medium"
+        class="relative mx-auto px-10 mobile:px-26 tablet:px-36 laptop:px-40 z-10 justify-center text-center text-white [font-family:'Helvetica_Neue'] text-2xl mobile:text-4xl laptop:text-5xl pt-20 mobile:pt-40 laptop:pt-50 font-medium"
       >
         <h1>Powerful features,</h1>
         <h1>for <span class="text-[#1481F1]">smarter</span> research</h1>
@@ -225,9 +216,9 @@ const { Content: About } = await render(about as any);
       </div>
       <div class="w-full h-auto bg-[#202020] z-0 relative"></div>
     </section>
-    <section class="relative bg-gray-100 z-10 mb-80">
+    <section class="relative bg-gray-100 z-10 mb-20 mobile:mb-30 tablet:mb-50">
       <h1
-        class="text-center text-[#202020] text-[50px] leading-[110%] [font-family:'Helvetica_Neue'] mt-50 font-medium"
+        class="text-center text-[#202020] text-3xl mobile:text-5xl leading-[110%] [font-family:'Helvetica_Neue'] mt-35 mobile:mt-50 font-medium"
       >
         {guide?.data.title}
       </h1>

@@ -20,7 +20,7 @@ const info = await getEntry("feature_extra", entry);
 const { Content } = await render(info as any);
 ---
 
-<div class="w-full h-200 grid gap-6 pt-15 pb-30 grid-cols-2 grid-rows-1">
+<div class="w-full h-200 grid gap-6 pt-15 pb-30 grid-cols-1 tablet:grid-cols-2 tablet:grid-rows-1">
   {
     mode == "collaboration" && (
       <>
@@ -52,13 +52,13 @@ const { Content } = await render(info as any);
   {
     mode == "text" && (
       <>
-        <div class="pr-20">
+        <div class="pr-20 order-2 tablet:order-1">
           <Content components={{ p: PageContentP, ConnectedSection }} />
         </div>
         <img
           src={image}
-          alt="text-image"
-          class="w-full h-full object-cover rounded-xl shadow-gray-400 shadow-xl"
+          alt="text-image "
+          class="w-full h-full object-cover rounded-xl shadow-gray-400 shadow-xl order-1 tablet:order-2"
         />
       </>
     )
